@@ -1,0 +1,33 @@
+Proyecto básico de empleados directo con jdbc sobre bd postgresql y ws soap.
+
+Tenemos un dao que usa jdbc directo. La conexión la obtenemos bien mediante el DriverManager
+o mediante un BasicDataSource de apache (comentar un bloque u otro en el dao para elegir).
+
+Además publicamos un servicio soap que usa el dao (paquetes jdbc.empleados.ws). Este servicio
+lo podemos publicar usando el server ws que viene con jdk o desplegando un war con tomcat.
+
+* Al definir el interfaz del servicio definimos es estilo del @SOAPBinding a RPC o a DOCUMENT.
+El primero es mucho más simple y más fácil de manejar por la estructura subyacente,
+pero sólo nos permite trabajar con tipos básicos (ni colecciones,ni interfaces). Hay
+un método, getAllEmpleados, que devuelve un Set, que necesitamos comentar si ponemos el estilo
+a RPC. Si no lo comentamos al publicar el servicio nos lanza una excepción. Si el estilo
+es DOCUMENT no hay problema. Además tenemos el método getEmpleados que devuelve Empleado[]
+y que funciona bien con estilo RPC porque los arrays sí son estándar ws.
+
+* Las clases publisher y client usando el server jdk son jdbc.empleados.ws.server.EmpleadosSoapPublisher
+y jdbc.empleados.ws.client.EmpleadosSoapClient.
+
+* Para ejecutar la app, ejecutar primero el publisher y luego el client.
+
+* Mostrar el wsdl: http://localhost:8888/ws/empleados?wsdl
+
+* Para publicar en tomcat proporcionamos un web.xml y un sun-jaxws.xml y desplegamos. El cliente
+es jdbc.empleados.ws.client.EmpleadosSoapTomcatClient.
+
+* En este caso podemos ver las características del servicio en http://localhost:8080/empleados-ws/empleadosWS,
+y acceder al wsdl en http://localhost:8080/empleados-ws/empleadosWS?wsdl
+
+* Hay otro proyecto en el mismo ws, jadb-ws empleados client, que implementa un
+cliente del servicio que no utiliza
+las clases del proyecto sino que utiliza stubs generados a partir del wsdl (es independiente
+del lenguaje en que esté generado el servicio web).

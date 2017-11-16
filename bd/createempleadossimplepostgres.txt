@@ -1,0 +1,22 @@
+drop database if exists empleados_simple;
+
+create database empleados_simple;
+\connect empleados_simple;
+
+CREATE TABLE IF NOT EXISTS empleados 
+(cif VARCHAR(9) NOT NULL, 
+nombre VARCHAR(20), 
+apellidos VARCHAR(20), 
+edad INTEGER, 
+primary key (cif));
+
+INSERT INTO empleados (cif, nombre, apellidos, edad) VALUES 
+('34334789H', 'Antonio', 'Martín', 23);
+INSERT INTO empleados (cif, nombre, apellidos, edad) VALUES
+('21094387T', 'Juan', 'González', 40);
+INSERT INTO empleados (cif, nombre, apellidos, edad) VALUES
+('01293474E', 'Isabel', 'Fuentes', 18);
+INSERT INTO empleados (cif, nombre, apellidos, edad) VALUES
+('23948745F', 'Lucille', 'King', 25);
+INSERT INTO empleados (cif, nombre, apellidos, edad) VALUES
+('40948574G', 'Neo', 'Preno', 12);
