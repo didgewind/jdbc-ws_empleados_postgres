@@ -1,12 +1,27 @@
-Proyecto básico de empleados directo con jdbc sobre bd postgresql y ws soap.
+Proyecto básico de empleados directo con jdbc sobre bd postgresql, ws soap y rest.
+Para desplegar usamos las librerías de lib y lib-rest. En libbak hay tres librerías
+(annotatios, jaxb-api y jsr181) que estaban en lib pero las sacamos para evitar conflictos
+con otras versiones que están en lib-rest. Además hemos sacado el servlet.jar de lib-rest
+para que no entre en conflicto con el tomcat. Por otra parte para que funcione rest (con
+lib-rest) hay que usar una versión de tomcat igual o superior a las que pone a continuación
+para evitar un bug conocido (yo uso el tomcat 8.0.47 que está en applications):
+
+trunk for 9.0.0.M18 onwards
+8.5.x for 8.5.12 onwards
+8.0.x for 8.0.42 onwards
+7.0.x for 7.0.76 onwards
+
+- JDBC:
 
 Tenemos un dao que usa jdbc directo. La conexión la obtenemos bien mediante el DriverManager
 o mediante un BasicDataSource de apache (comentar un bloque u otro en el dao para elegir).
 
-Además publicamos un servicio soap que usa el dao (paquetes jdbc.empleados.ws). Este servicio
+- SERVICIO SOAP:
+
+publicamos un servicio soap que usa el dao (paquetes jdbc.empleados.ws). Este servicio
 lo podemos publicar usando el server ws que viene con jdk o desplegando un war con tomcat.
 
-* Al definir el interfaz del servicio definimos es estilo del @SOAPBinding a RPC o a DOCUMENT.
+* Al definir el interfaz del servicio definimos el estilo del @SOAPBinding a RPC o a DOCUMENT.
 El primero es mucho más simple y más fácil de manejar por la estructura subyacente,
 pero sólo nos permite trabajar con tipos básicos (ni colecciones,ni interfaces). Hay
 un método, getAllEmpleados, que devuelve un Set, que necesitamos comentar si ponemos el estilo
@@ -31,3 +46,17 @@ y acceder al wsdl en http://localhost:8080/empleados-ws/empleadosWS?wsdl
 cliente del servicio que no utiliza
 las clases del proyecto sino que utiliza stubs generados a partir del wsdl (es independiente
 del lenguaje en que esté generado el servicio web).
+
+- SERVICIO REST:
+
+Utilizamos jersey como implementación (librerías lib-rest). El servicio está definido
+en jdbc.empleados.ws.rest.EmpleadosRestService y lo activamos en web.xml con el servlet
+Jersey RESTful Application. Para probarlo podemos usar Postman y cargar la batería de pruebas
+de la carpeta postman. Por ejemplo, para listar todos los empleados podemos invocar la siguiente
+url:
+
+	http://localhost:8080/empleados-ws/rest/empleados
+	
+Además en el proyecto cliente tenemos la clase EmpleadosExtRestClient que utiliza jersey-client
+para implementar un cliente básico del servicio rest.
+

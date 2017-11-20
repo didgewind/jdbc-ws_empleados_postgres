@@ -1,0 +1,53 @@
+{
+	"variables": [],
+	"info": {
+		"name": "empleados",
+		"_postman_id": "fd5757de-1fc5-8277-b660-21585c7fd063",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "delete empleado",
+			"request": {
+				"url": "",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "get all empleados",
+			"request": {
+				"url": "http://localhost:8080/empleados-ws/rest/empleados",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "insert empleado post",
+			"request": {
+				"url": "http://localhost:8080/empleados-ws/rest/empleados",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"apellidos\": \"nuevo\",\n        \"cif\": \"2345234R\",\n        \"edad\": 22,\n        \"nombre\": \"julián\"\n    }"
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

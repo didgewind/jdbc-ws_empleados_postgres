@@ -12,11 +12,15 @@ import jdbc.empleados.ws.server.EmpleadosService;
 /*
  * Cliente del ws publicado con el publisher básico del jdk
  * (clase jdbc.empleados.ws.server.EmpleadosSoapPublisher)
+ * o desplegado en tomcat
  */
 public class EmpleadosSoapClient {
 
 	public static void main(String[] args) throws MalformedURLException {
-		URL wsdlURL = new URL("http://localhost:8880/ws/empleados?wsdl");
+		/* wsdl servidor jdk */
+//		URL wsdlURL = new URL("http://localhost:8880/ws/empleados?wsdl");
+		/* wsdl tomcat */
+		URL wsdlURL = new URL("http://localhost:8080/empleados-ws/empleadosWS?wsdl");
 		//check above URL in browser, you should see WSDL file
 		
 		//creating QName using targetNamespace and name
