@@ -1,0 +1,20 @@
+- Qué son ws
+
+- SOAP y REST
+
+- EmpleadosService. style = DOCUMENT o RPC (DOCUMENT es más complejo, mensajes
+más pesados xro contempla tipos específicos de lenguajes como colecciones. RPC
+obliga a transformar esas colecciones en arrays).
+
+- Cliente interno usando clases del servidor (servicio y modelo).
+
+- TcpMon
+
+- Cliente externo atacando mi equipo (tengo que publicar el servicio
+no en localhost sino con mi ip, porque si no el wsdl, al dividirse en dos partes,
+no lee bien la segunda, pues hace un import del otro doc desde localhost en vez
+de mi ip).
+
+- Publicar en tomcat
+
+- REST
